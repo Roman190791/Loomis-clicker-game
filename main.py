@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# Дозволити запити з гри
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["https://loomis-clicker-game-ljng.vercel.app"],
@@ -12,10 +11,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/api/save-user")
+users_db = {}
+
+@app.post("/api/user")
 async def save_user(request: Request):
     data = await request.json()
-    telegram_id = data.get("telegram_id")
+    user_id = data.get("id")
     username = data.get("username")
-    print(f"Новий гравець: {telegram_id}, {username}")
+    users_db[user_id] = {"username": username, "balance": 0}
+    print(f"[LOG] Гравець: {username} ({user_id}) доданий.")
     return {"status": "saved"}
