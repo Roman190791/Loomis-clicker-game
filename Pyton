@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from telegram import Bot, KeyboardButton, ReplyKeyboardMarkup, WebAppInfo
 
-BOT_TOKEN = "8100990300:AAGI-MJIF5JQzm7r49NugMxUgz1kSx_J7Kk"
-bot = Bot(token=BOT_TOKEN)
+BOT_TOKEN = "7869396768:AAEO1pBOwBmVw5X8iWigJVxzskP4bCGYOwc"Bot(token=BOT_TOKEN)
 
 app = FastAPI()
 
