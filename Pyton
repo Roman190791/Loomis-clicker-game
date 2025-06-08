@@ -1,0 +1,17 @@
+from fastapi import FastAPI
+from telegram import Bot, KeyboardButton, ReplyKeyboardMarkup, WebAppInfo
+
+BOT_TOKEN = "8100990300:AAGI-MJIF5JQzm7r49NugMxUgz1kSx_J7Kk"
+bot = Bot(token=BOT_TOKEN)
+
+app = FastAPI()
+
+@app.get("/start")
+def send_start_keyboard(chat_id: int):
+    button = KeyboardButton(
+        text="▶️ Грати у Loomis Clicker",
+        web_app=WebAppInfo(url="https://loomis-clicker-game-ljng.vercel.app")
+    )
+    markup = ReplyKeyboardMarkup([[button]], resize_keyboard=True)
+    bot.send_message(chat_id=chat_id, text="Запусти гру:", reply_markup=markup)
+    return {"status": "sent"}
