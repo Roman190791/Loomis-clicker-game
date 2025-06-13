@@ -1,0 +1,25 @@
+from aiogram import Bot, Dispatcher, types, executor
+import aiohttp
+
+API_TOKEN = "7869396768:AAEO1pBOwBmVw5X8iWigJVxzskP4bCGYOwc"
+
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher(bot)
+
+BACKEND_URL = "https://loomis-clicker-game-1.onrender.com/api/user"
+
+@dp.message_handler(commands=["start"])
+async def cmd_start(message: types.Message):
+    user_id = message.from_user.id
+    username = message.from_user.username or message.from_user.first_name
+
+    # Відправляємо дані на бекенд
+    async with aiohttp.ClientSession() as session:
+        async with session.post(BACKEND_URL, json={"id": user_id, "username": username}) as resp:
+            if resp.status == 200:
+                await message.answer(f"Привіт, {username}! Твої дані збережено.")
+            else:
+                await message.answer("Виникла помилка при збереженні даних.")
+
+if __name__ == "__main__":
+    executor.start_polling(dp, skip_updates=True)
