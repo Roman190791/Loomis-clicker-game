@@ -31,3 +31,19 @@ window.addEventListener('DOMContentLoaded', () => {
     scoreEl.textContent = `LumisCoin: ${playerBalance.toString()}`;
   }
 });
+async function saveUserToBackend(userId, username) {
+  try {
+    const res = await fetch('https://your-fastapi-url.onrender.com/api/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: userId, username: username })
+    });
+
+    const data = await res.json();
+    console.log('[BACKEND]', data);
+  } catch (error) {
+    console.error('[ERROR]', error);
+  }
+}
