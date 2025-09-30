@@ -2,7 +2,7 @@ import asyncio
 import aiohttp
 from aiogram import Bot, Dispatcher, types, Router, F
 
-API_TOKEN = "ТУТ_ВСТАВ_ТОКЕН"
+API_TOKEN = "7869396768:AAHpxmmFUXuwUeS8E29LBjoFJo0PSSKbJR8"
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
